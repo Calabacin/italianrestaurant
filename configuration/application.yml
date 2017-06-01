@@ -1,2 +1,6 @@
 project:
      name: Italian Restaurant
+
+management:
+     security:
+          enabled: false
