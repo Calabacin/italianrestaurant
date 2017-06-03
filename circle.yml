@@ -20,10 +20,10 @@ test:
   pre:
   #- docker run --name test-postgres -d -p 5432:5432 -e POSTGRES_USER=$DB_USER -e POSTGRES_PASSWORD=$DB_PASSWORD -e POSTGRES_DB=$DB_NAME postgres
   override:
-    - mvn test -f /discoveryserver/pom.xml
-    - mvn test -f /configserver/pom.xml
-    - mvn test -f /adminui/pom.xml
-    - mvn test -f /microservicesdashboard/pom.xml
-    - mvn test -f /menu/pom.xml
-    - mvn test -f /cook/pom.xml
-    - mvn test -f /waiter/pom.xml
+    - mvn test -f discoveryserver/pom.xml
+    - mvn test -f configserver/pom.xml
+    - mvn test -f adminui/pom.xml
+    - mvn test -f microservicesdashboard/pom.xml
+    - mvn test -f menu/pom.xml
+    - mvn test -f cook/pom.xml
+    - mvn test -f waiter/pom.xml
