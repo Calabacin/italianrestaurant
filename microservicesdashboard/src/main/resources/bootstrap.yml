@@ -1,10 +1,6 @@
 spring:
   application:
-    name: adminui
-  cloud:
-    service-registry:
-      auto-registration:
-        fail-fast: true
+    name: microservicesdashboard
 eureka:
   client:
     serviceUrl:

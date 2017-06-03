@@ -2,6 +2,7 @@ package italian.restaurant.waiter;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.cloud.stream.annotation.Output;
@@ -21,6 +22,7 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
+@EnableDiscoveryClient
 @SpringBootApplication
 @EnableBinding(WaiterActivity.class)
 @RestController

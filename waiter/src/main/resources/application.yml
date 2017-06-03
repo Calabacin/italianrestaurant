@@ -1,0 +1,17 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        orders:
+          destination: orders
+          content-type: application/json
+        prepareddishes:
+          destination: prepareddishes
+          content-type: application/json
+          group: waiters
+
+server:
+  port: 8080
+  
+waiter:
+  name: Mario

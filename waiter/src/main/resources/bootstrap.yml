@@ -1,6 +1,6 @@
 spring:
   application:
-    name: adminui
+    name: waiter
   cloud:
     service-registry:
       auto-registration:
