@@ -1,28 +1,31 @@
 package italian.restaurant.waiter.ui.controller;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import italian.restaurant.waiter.logic.WaiterService;
+import lombok.RequiredArgsConstructor;
+
 @Controller
-@RefreshScope
 @RequestMapping("/")
+@RefreshScope
+@RequiredArgsConstructor
 public class HomeController {
 
-    @Value("${waiter.name}")
-    private String waiterName;
+    private final WaiterService waiterService;
 
     @GetMapping
     public String page() {
+        waiterService.requestMenu();
         return "home";
     }
 
     @ModelAttribute("waiterName")
     public String name() {
-        return waiterName;
+        return waiterService.getName();
     }
 
 }

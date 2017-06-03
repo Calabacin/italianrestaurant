@@ -1,0 +1,14 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        requestmenu:
+          destination: requestmenu
+          content-type: application/json
+          group: menu
+        menu:
+          destination: menu
+          content-type: application/json
+
+server:
+  port: 8082

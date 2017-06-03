@@ -1,0 +1,14 @@
+spring:
+  cloud:
+    stream:
+      bindings:
+        orders:
+          destination: orders
+          content-type: application/json
+          group: kitchen
+        dishes:
+          destination: dishes
+          content-type: application/json
+
+server:
+  port: 8081

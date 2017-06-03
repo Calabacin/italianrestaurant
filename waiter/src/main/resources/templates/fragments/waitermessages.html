@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head">
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
+<link th:href="@{/css/style.css}" rel="stylesheet" media="screen" />
+
+</head>
+<body>
+
+  <div th:fragment="messages">
+    
+    <h3>
+      <span th:text="${waiterName}">Luigi</span> says:
+    </h3>
+    
+    <p id="waiter-message">
+      Welcome to the Italian Restaurant. <br /> I am <span th:text="${waiterName}">Luigi</span>, your waiter. <br />
+      I will bring you the menu in just a second.
+    </p>
+    
+    <script th:src="@{/js/waitermessages.js}"></script>
+    
+  </div>
+
+</body>
+</html>

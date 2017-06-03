@@ -5,8 +5,15 @@ spring:
         orders:
           destination: orders
           content-type: application/json
-        prepareddishes:
-          destination: prepareddishes
+        dishes:
+          destination: dishes
+          content-type: application/json
+          group: waiters
+        requestmenu:
+          destination: requestmenu
+          content-type: application/json
+        menu:
+          destination: menu
           content-type: application/json
           group: waiters
 
