@@ -2,7 +2,7 @@ version: 2
 jobs:
   
   test-cook:
-    machine: true
+    docker: true
     working_directory: ~/italianrestaurant
     steps:
     - checkout
