@@ -16,6 +16,47 @@ jobs:
     - run:
         name: Testing Config Server
         command: mvn test -f configserver/pom.xml
+  test-adminui:
+    machine: true
+    working_directory: ~/italianrestaurant
+    steps:
+    - checkout
+    - run:
+        name: Testing Admin UI
+        command: mvn test -f adminui/pom.xml
+  test-microservicesdashboard:
+    machine: true
+    working_directory: ~/italianrestaurant
+    steps:
+    - checkout
+    - run:
+        name: Testing Microservices Dashboard
+        command: mvn test -f microservicesdashboard/pom.xml
+  test-cook:
+    machine: true
+    working_directory: ~/italianrestaurant
+    steps:
+    - checkout
+    - run:
+        name: Testing Cook
+        command: mvn test -f cook/pom.xml
+  test-waiter:
+    machine: true
+    working_directory: ~/italianrestaurant
+    steps:
+    - checkout
+    - run:
+        name: Testing Waiter
+        command: mvn test -f waiter/pom.xml
+  test-menu:
+    machine: true
+    working_directory: ~/italianrestaurant
+    steps:
+    - checkout
+    - run:
+        name: Testing Menu
+        command: mvn test -f menu/pom.xml      
+        
   deploy-discoveryserver:
     machine: true
     working_directory: ~/italianrestaurant
@@ -25,15 +66,118 @@ jobs:
         name: Deploying Discovery Server
         command: |
           cd discoveryserver
-          mvn package docker:build
+          mvn clean package -DskipTests=true
+          docker build -t guillermoherrero/italianrestaurant-discoveryserver .
           docker login -u="$DOCKER_USER" -p="$DOCKER_PASS" -e="$DOCKER_EMAIL"
+          docker push guillermoherrero/italianrestaurant-discoveryserver
+  deploy-configserver:
+    machine: true
+    working_directory: ~/italianrestaurant
+    steps:
+    - checkout
+    - run:
+        name: Deploying Config Server
+        command: |
+          cd configserver
+          mvn clean package -DskipTests=true
+          docker build -t guillermoherrero/italianrestaurant-configserver .
+          docker login -u="$DOCKER_USER" -p="$DOCKER_PASS" -e="$DOCKER_EMAIL"
+          docker push guillermoherrero/italianrestaurant-configserver
+  deploy-adminui:
+    machine: true
+    working_directory: ~/italianrestaurant
+    steps:
+    - checkout
+    - run:
+        name: Deploying Admin UI
+        command: |
+          cd adminui
+          mvn clean package -DskipTests=true
+          docker build -t guillermoherrero/italianrestaurant-adminui .
+          docker login -u="$DOCKER_USER" -p="$DOCKER_PASS" -e="$DOCKER_EMAIL"
+          docker push guillermoherrero/italianrestaurant-adminui
+  deploy-microservicesdashboard:
+    machine: true
+    working_directory: ~/italianrestaurant
+    steps:
+    - checkout
+    - run:
+        name: Deploying Microservices Dashboard
+        command: |
+          cd microservicesdashboard
+          mvn clean package -DskipTests=true
+          docker build -t guillermoherrero/italianrestaurant-microservicesdashboard .
+          docker login -u="$DOCKER_USER" -p="$DOCKER_PASS" -e="$DOCKER_EMAIL"
+          docker push guillermoherrero/italianrestaurant-microservicesdashboard
+  deploy-cook:
+    machine: true
+    working_directory: ~/italianrestaurant
+    steps:
+    - checkout
+    - run:
+        name: Deploying Cook
+        command: |
+          cd cook
+          mvn clean package -DskipTests=true
+          docker build -t guillermoherrero/italianrestaurant-cook .
+          docker login -u="$DOCKER_USER" -p="$DOCKER_PASS" -e="$DOCKER_EMAIL"
+          docker push guillermoherrero/italianrestaurant-cook
+  deploy-waiter:
+    machine: true
+    working_directory: ~/italianrestaurant
+    steps:
+    - checkout
+    - run:
+        name: Deploying Waiter
+        command: |
+          cd waiter
+          mvn clean package -DskipTests=true
+          docker build -t guillermoherrero/italianrestaurant-waiter .
+          docker login -u="$DOCKER_USER" -p="$DOCKER_PASS" -e="$DOCKER_EMAIL"
+          docker push guillermoherrero/italianrestaurant-waiter
+  deploy-menu:
+    machine: true
+    working_directory: ~/italianrestaurant
+    steps:
+    - checkout
+    - run:
+        name: Deploying Microservices Dashboard
+        command: |
+          cd menu
+          mvn clean package -DskipTests=true
+          docker build -t guillermoherrero/italianrestaurant-menu .
+          docker login -u="$DOCKER_USER" -p="$DOCKER_PASS" -e="$DOCKER_EMAIL"
+          docker push guillermoherrero/italianrestaurant-menu
           
 workflows:
   version: 2
   build_and_test:
     jobs:
-      - test-discoveryserver:
-      - test-configserver:
+      - test-discoveryserver
+      - test-configserver
+      - test-adminui
+      - test-microservicesdashboard
+      - test-cook
+      - test-waiter
+      - test-menu
       - deploy-discoveryserver:
           requires:
             - test-discoveryserver
+      - deploy-configserver:
+          requires:
+            - test-configserver
+      - deploy-adminui:
+          requires:
+            - test-adminui
+      - deploy-microservicesdashboard:
+          requires:
+            - test-microservicesdashboard
+      - deploy-cook:
+          requires:
+            - test-cook
+      - deploy-waiter:
+          requires:
+            - test-waiter
+      - deploy-menu:
+          requires:
+            - test-menu
