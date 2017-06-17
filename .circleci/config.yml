@@ -25,7 +25,8 @@ jobs:
         name: Deploying Discovery Server
         command: |
           cd discoveryserver
-          mvn package docker:build
+          mvn clean package
+          docker build -t guillermoherrero/italianrestaurant-discoveryserver .
           docker login -u="$DOCKER_USER" -p="$DOCKER_PASS" -e="$DOCKER_EMAIL"
           
 workflows:
