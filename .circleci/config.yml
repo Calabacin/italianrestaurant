@@ -6,6 +6,8 @@ jobs:
     steps:
     - checkout
   test-eureka:
+    machine: true
+    working_directory: ~/italianrestaurant
     steps:
     - run:
         name: Testing Discovery Server
