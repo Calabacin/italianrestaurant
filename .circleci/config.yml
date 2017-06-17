@@ -26,7 +26,7 @@ jobs:
         command: |
           cd discoveryserver
           mvn clean package
-          docker build -t guillermoherrero/italianrestaurant-discoveryserver .
+          docker build -f Dockerfile -t guillermoherrero/italianrestaurant-discoveryserver .
           docker login -u="$DOCKER_USER" -p="$DOCKER_PASS" -e="$DOCKER_EMAIL"
           
 workflows:
@@ -35,4 +35,6 @@ workflows:
     jobs:
       - test-discoveryserver
       - test-configserver
-      - deploy-discoveryserver
+      - deploy-discoveryserver:
+          requires:
+            - test-discoveryserver
