@@ -17,4 +17,6 @@ workflows:
   build_and_test:
     jobs:
     - build
-    - test-eureka
+    - test-eureka:
+      requires:
+        -build
