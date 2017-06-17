@@ -2,7 +2,6 @@ version: 2
 jobs:
   build:
     working_directory: ~/italianrestaurant
-    docker: null
     steps:
     - checkout
   test-eureka:
@@ -19,7 +18,7 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-    - build: null
+    - build
     - test-eureka: null
       requires:
       - build
