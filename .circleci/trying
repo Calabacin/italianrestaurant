@@ -38,6 +38,11 @@ jobs:
     steps:
     - checkout
     - run:
+        name: Running Kafka with Docker Compose
+        command: |
+          cd kafka
+          docker-compose up -d
+    - run:
         name: Testing Cook
         command: mvn test -f cook/pom.xml
   test-waiter:
@@ -46,6 +51,11 @@ jobs:
     steps:
     - checkout
     - run:
+        name: Running Kafka with Docker Compose
+        command: |
+          cd kafka
+          docker-compose up -d
+    - run:
         name: Testing Waiter
         command: mvn test -f waiter/pom.xml
   test-menu:
@@ -53,6 +63,11 @@ jobs:
     working_directory: ~/italianrestaurant
     steps:
     - checkout
+    - run:
+        name: Running Kafka with Docker Compose
+        command: |
+          cd kafka
+          docker-compose up -d
     - run:
         name: Testing Menu
         command: mvn test -f menu/pom.xml      
