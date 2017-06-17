@@ -9,6 +9,7 @@ jobs:
     machine: true
     working_directory: ~/italianrestaurant
     steps:
+    - checkout
     - run:
         name: Testing Discovery Server
         command: mvn test -f discoveryserver/pom.xml
@@ -17,6 +18,4 @@ workflows:
   build_and_test:
     jobs:
     - build
-    - test-eureka:
-      requires:
-        -build
+    - test-eureka
