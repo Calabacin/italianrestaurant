@@ -155,6 +155,29 @@ workflows:
     jobs:
       - test-discoveryserver
       - test-configserver
+      - test-adminui
+      - test-microservicesdashboard
+      - test-cook
+      - test-waiter
+      - test-menu
       - deploy-discoveryserver:
           requires:
             - test-discoveryserver
+      - deploy-configserver:
+          requires:
+            - test-configserver
+      - deploy-adminui:
+          requires:
+            - test-adminui
+      - deploy-microservicesdashboard:
+          requires:
+            - test-microservicesdashboard
+      - deploy-cook:
+          requires:
+            - test-cook
+      - deploy-waiter:
+          requires:
+            - test-waiter
+      - deploy-menu:
+          requires:
+            - test-menu
