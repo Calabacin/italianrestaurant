@@ -4,24 +4,8 @@ jobs:
     working_directory: ~/italianrestaurant
     steps:
     - checkout
-  test-eureka:
-    steps:
-    - run:
-        name: Testing Discovery Server
-        command: mvn test -f discoveryserver/pom.xml
-  test-configserver:
-    steps:
-    - run:
-        name: Testing Config Server
-        command: mvn test -f configserver/pom.xml
 workflows:
   version: 2
   build_and_test:
     jobs:
     - build
-    - test-eureka: null
-      requires:
-      - build
-    - test-configserver: null
-      requires:
-      - build
