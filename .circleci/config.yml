@@ -1,0 +1,28 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/italianrestaurant
+    docker:
+    steps:
+    - checkout
+  test-eureka:
+    steps:
+    - run:
+        name: Testing Discovery Server
+        command: mvn test -f discoveryserver/pom.xml
+  test-configserver:
+    steps:
+    - run:
+        name: Testing Config Server
+        command: mvn test -f configserver/pom.xml
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+    - build:
+    - test-eureka:
+      requires:
+      - build
+    - test-configserver:
+      requires:
+      - build
