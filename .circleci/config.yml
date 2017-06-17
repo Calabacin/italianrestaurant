@@ -16,24 +16,11 @@ jobs:
     - run:
         name: Testing Config Server
         command: mvn test -f configserver/pom.xml
-  deploy-discoveryserver:
-    machine: true
-    working_directory: ~/italianrestaurant
-    steps:
-    - checkout
-    - run:
-        name: Deploying Discovery Server
-        command: |
-          cd discoveryserver
-          mvn package docker:build
-          docker login -u="$DOCKER_USER" -p="$DOCKER_PASS" -e="$DOCKER_EMAIL"
+  
           
 workflows:
   version: 2
   build_and_test:
     jobs:
-      - test-discoveryserver:
-      - test-configserver:
-      - deploy-discoveryserver:
-          requires:
-            - test-discoveryserver
+      - test-discoveryserver
+      - test-configserver
