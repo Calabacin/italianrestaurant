@@ -8,4 +8,4 @@ management:
 spring:
   cloud:
     zookeeper:
-      connect-string: ${ZOOKEEPER_HOSTNAME}:2181
+      connect-string: ${ZOOKEEPER_HOSTNAME:localhost}:2181
