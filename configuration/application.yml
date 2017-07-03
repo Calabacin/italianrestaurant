@@ -4,3 +4,8 @@ project:
 management:
      security:
           enabled: false
+
+spring:
+  cloud:
+    zookeeper:
+      connect-string: ${ZOOKEEPER_HOSTNAME}:2181

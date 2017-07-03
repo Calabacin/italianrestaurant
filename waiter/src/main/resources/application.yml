@@ -1,6 +1,10 @@
 spring:
   cloud:
     stream:
+      kafka:
+        binder:
+          brokers: 
+            - ${KAFKA_HOSTNAME:localhost}
       bindings:
         orders:
           destination: orders
