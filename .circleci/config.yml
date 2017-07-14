@@ -45,11 +45,11 @@ jobs:
           mvn test -f menu/pom.xml
           mvn test -f waiter/pom.xml
           
-workflows:
-  version: 2
-  test_package_build_and_deploy:
-    jobs:
-      - test
+#workflows:
+#  version: 2
+#  test_package_build_and_deploy:
+#    jobs:
+#      - test
       
 #  test-configserver:
 #    machine: true
