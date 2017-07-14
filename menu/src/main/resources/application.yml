@@ -5,6 +5,8 @@ spring:
         binder:
           brokers: 
             - ${KAFKA_HOSTNAME:localhost}
+          zkNodes: 
+            - ${ZOOKEEPER_HOSTNAME:localhost}
       bindings:
         requestmenu:
           destination: requestmenu

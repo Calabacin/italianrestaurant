@@ -5,7 +5,7 @@ services:
     ports:
       - "2181:2181"
   kafka:
-    image: guillermoherrero/kafka
+    image: guillermoherrero/italianrestaurant/kafka
     ports:
       - "9092:9092"
     environment:
@@ -16,13 +16,15 @@ services:
     volumes:
       - ~/docker-data/italianrestaurant/kafka/docker.sock:/var/run/docker.sock
   discoveryserver:
-    image: guillermoherrero/italianrestaurant-discoveryserver
+    image: guillermoherrero/italianrestaurant/discoveryserver
     ports:
       - "8761:8761"
+    environment:
+      EUREKA_HOSTNAME: $EUREKA_HOSTNAME
   configserver:
     depends_on:
       - discoveryserver
-    image: guillermoherrero/italianrestaurant-configserver
+    image: guillermoherrero/italianrestaurant/configserver
     ports:
       - "8888:8888"
     environment:
@@ -30,7 +32,8 @@ services:
   adminui:
     depends_on:
       - discoveryserver
-    image: guillermoherrero/italianrestaurant-adminui
+      - configserver
+    image: guillermoherrero/italianrestaurant/adminui
     ports:
       - "9000:9000"
     environment:
@@ -38,7 +41,8 @@ services:
   microservicesdashboard:
     depends_on:
       - discoveryserver
-    image: guillermoherrero/italianrestaurant-microservicesdashboard
+      - configserver
+    image: guillermoherrero/italianrestaurant/microservicesdashboard
     ports:
       - "9001:9001"
     environment:
@@ -46,39 +50,39 @@ services:
   waiter:
     depends_on:
       - discoveryserver
+      - configserver
       - zookeeper
       - kafka
-    image: guillermoherrero/italianrestaurant-waiter
+    image: guillermoherrero/italianrestaurant/waiter
     ports:
       - "8080:8080"
     environment:
       EUREKA_HOSTNAME: discoveryserver
       KAFKA_HOSTNAME: kafka
       ZOOKEEPER_HOSTNAME: zookeeper
-#      SPRING_APPLICATION_JSON: '{"spring.cloud.zookeeper.connect-string":"zookeeper:2181"}'
-#     SPRING_CLOUD_ZOOKEEPER_CONNECTSTRING: zookeeper:2181
+      SPRING_CLOUD_STREAM_KAFKA_BINDER_ZKNODES: zookeeper
   cook:
     depends_on:
       - discoveryserver
+      - configserver
       - zookeeper
       - kafka
-    image: guillermoherrero/italianrestaurant-cook
+    image: guillermoherrero/italianrestaurant/cook
     environment:
       EUREKA_HOSTNAME: discoveryserver
       KAFKA_HOSTNAME: kafka
       ZOOKEEPER_HOSTNAME: zookeeper
-#      SPRING_APPLICATION_JSON: '{"spring.cloud.zookeeper.connect-string":"zookeeper:2181"}'      
-#      SPRING_CLOUD_ZOOKEEPER_CONNECTSTRING: zookeeper:2181
+      SPRING_CLOUD_STREAM_KAFKA_BINDER_ZKNODES: zookeeper
   menu:
     depends_on:
       - discoveryserver
+      - configserver
       - zookeeper
       - kafka
-    image: guillermoherrero/italianrestaurant-menu
+    image: guillermoherrero/italianrestaurant/menu
     environment:
       EUREKA_HOSTNAME: discoveryserver
       KAFKA_HOSTNAME: kafka
       ZOOKEEPER_HOSTNAME: zookeeper
-#      SPRING_APPLICATION_JSON: '{"spring.cloud.zookeeper.connect-string":"zookeeper:2181"}'
-#      SPRING_CLOUD_ZOOKEEPER_CONNECTSTRING: zookeeper:2181
+      SPRING_CLOUD_STREAM_KAFKA_BINDER_ZKNODES: zookeeper
 

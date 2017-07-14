@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Constant Flow Websocket</title>
-<object th:include="/fragments/resources :: head" th:remove="tag"></object>
+<object th:include="fragments/resources :: head" th:remove="tag"></object>
 </head>
 <body>
 
@@ -47,7 +47,7 @@
     </div>
   </div>
 
-  <object th:include="/fragments/resources :: bottom" th:remove="tag"></object>
+  <object th:include="fragments/resources :: bottom" th:remove="tag"></object>
   <script th:src="@{/js/constantflow.js}"></script>
 
 </body>

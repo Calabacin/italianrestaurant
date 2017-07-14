@@ -5,7 +5,7 @@ management:
      security:
           enabled: false
 
-spring:
-  cloud:
-    zookeeper:
-      connect-string: ${ZOOKEEPER_HOSTNAME:localhost}:2181
+#spring:
+#  cloud:
+#    zookeeper:
+#      connect-string: ${ZOOKEEPER_HOSTNAME:localhost}:2181
