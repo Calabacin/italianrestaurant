@@ -14,7 +14,7 @@ services:
       DOCKER_HOST: 127.0.0.1:2375
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
     volumes:
-      - /home/beyondcoding/development/dockerdata/kafka/docker.sock:/var/run/docker.sock
+      - ~/docker-data/italianrestaurant/kafka/docker.sock:/var/run/docker.sock
   discoveryserver:
     image: guillermoherrero/italianrestaurant-discoveryserver
     ports:
@@ -54,7 +54,8 @@ services:
     environment:
       EUREKA_HOSTNAME: discoveryserver
       KAFKA_HOSTNAME: kafka
-      SPRING_APPLICATION_JSON: '{"spring.cloud.zookeeper.connect-string":"zookeeper:2181"}'
+      ZOOKEEPER_HOSTNAME: zookeeper
+#      SPRING_APPLICATION_JSON: '{"spring.cloud.zookeeper.connect-string":"zookeeper:2181"}'
 #     SPRING_CLOUD_ZOOKEEPER_CONNECTSTRING: zookeeper:2181
   cook:
     depends_on:
@@ -65,7 +66,8 @@ services:
     environment:
       EUREKA_HOSTNAME: discoveryserver
       KAFKA_HOSTNAME: kafka
-      SPRING_APPLICATION_JSON: '{"spring.cloud.zookeeper.connect-string":"zookeeper:2181"}'      
+      ZOOKEEPER_HOSTNAME: zookeeper
+#      SPRING_APPLICATION_JSON: '{"spring.cloud.zookeeper.connect-string":"zookeeper:2181"}'      
 #      SPRING_CLOUD_ZOOKEEPER_CONNECTSTRING: zookeeper:2181
   menu:
     depends_on:
@@ -76,6 +78,7 @@ services:
     environment:
       EUREKA_HOSTNAME: discoveryserver
       KAFKA_HOSTNAME: kafka
-      SPRING_APPLICATION_JSON: '{"spring.cloud.zookeeper.connect-string":"zookeeper:2181"}'
+      ZOOKEEPER_HOSTNAME: zookeeper
+#      SPRING_APPLICATION_JSON: '{"spring.cloud.zookeeper.connect-string":"zookeeper:2181"}'
 #      SPRING_CLOUD_ZOOKEEPER_CONNECTSTRING: zookeeper:2181
 
