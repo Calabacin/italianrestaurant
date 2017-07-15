@@ -32,7 +32,6 @@ services:
   adminui:
     depends_on:
       - discoveryserver
-      - configserver
     image: guillermoherrero/italianrestaurant/adminui
     ports:
       - "9000:9000"
@@ -41,7 +40,6 @@ services:
   microservicesdashboard:
     depends_on:
       - discoveryserver
-      - configserver
     image: guillermoherrero/italianrestaurant/microservicesdashboard
     ports:
       - "9001:9001"
@@ -50,7 +48,6 @@ services:
   waiter:
     depends_on:
       - discoveryserver
-      - configserver
       - zookeeper
       - kafka
     image: guillermoherrero/italianrestaurant/waiter
@@ -64,7 +61,6 @@ services:
   cook:
     depends_on:
       - discoveryserver
-      - configserver
       - zookeeper
       - kafka
     image: guillermoherrero/italianrestaurant/cook
@@ -76,7 +72,6 @@ services:
   menu:
     depends_on:
       - discoveryserver
-      - configserver
       - zookeeper
       - kafka
     image: guillermoherrero/italianrestaurant/menu
