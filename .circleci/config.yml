@@ -36,19 +36,20 @@ jobs:
         command: |
           mkdir kafka-data
           cd kafka-data
-          wget https://raw.githubusercontent.com/guillermoherrero/italianrestaurant/master/kafka/docker-compose-test.yml docker-compose.yml
+          wget https://raw.githubusercontent.com/guillermoherrero/italianrestaurant/master/kafka/docker-compose-test.yml
+          mv docker-compose-test docker-compose.yml
           docker-compose up -d
     
     - run:
         name: Test Services
         command: | 
+          mvn test -f cook/pom.xml
+          mvn test -f menu/pom.xml
+          mvn test -f waiter/pom.xml
           mvn test -f discoveryserver/pom.xml
           mvn test -f configserver/pom.xml
           mvn test -f adminui/pom.xml
           mvn test -f microservicesdashboard/pom.xml
-          mvn test -f cook/pom.xml
-          mvn test -f menu/pom.xml
-          mvn test -f waiter/pom.xml
           
 #workflows:
 #  version: 2
