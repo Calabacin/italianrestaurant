@@ -5,7 +5,7 @@ services:
     ports:
       - "2181:2181"
   kafka:
-    image: guillermoherrero/italianrestaurant-kafka
+    build: .
     ports:
       - "9092:9092"
     environment:
