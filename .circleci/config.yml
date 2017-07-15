@@ -37,7 +37,7 @@ jobs:
           mkdir kafka-data
           cd kafka-data
           wget https://raw.githubusercontent.com/guillermoherrero/italianrestaurant/master/kafka/docker-compose-test.yml
-          mv docker-compose-test docker-compose.yml
+          mv docker-compose-test.yml docker-compose.yml
           docker-compose up -d
     
     - run:
